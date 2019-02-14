@@ -1,0 +1,43 @@
+{
+	"name": "apresentacoes-oucs",
+	"description": "Apresentação das Operações Urbanas Consorciadas de São Paulo",
+	"author": "SP Urbanismo <desenvolvimento@spurbanismo.sp.gov.br>",
+	"license": "GPL-3.0",
+	"version": "0.1.0",
+	"bugs": {
+		"url": "https://github.com/SPURB/apresentacoes-oucs/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SPURB/apresentacoes-oucs.git"
+	},
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"register-service-worker": "^1.5.2",
+		"vue": "^2.5.22",
+		"vue-router": "^3.0.1",
+		"vuex": "^3.0.1"
+	},
+	"devDependencies": {
+		"@vue/cli-plugin-babel": "^3.4.0",
+		"@vue/cli-plugin-eslint": "^3.4.0",
+		"@vue/cli-plugin-pwa": "^3.4.0",
+		"@vue/cli-service": "^3.4.0",
+		"@vue/eslint-config-standard": "^4.0.0",
+		"animate.css": "^3.7.0",
+		"babel-eslint": "^10.0.1",
+		"eagle.js": "^0.4.4",
+		"eslint": "^5.8.0",
+		"eslint-plugin-vue": "^5.0.0",
+		"highlight.js": "^9.14.2",
+		"node-sass": "^4.9.0",
+		"pug": "^2.0.3",
+		"pug-plain-loader": "^1.0.0",
+		"sass-loader": "^7.1.0",
+		"vue-template-compiler": "^2.5.21"
+	}
+}
