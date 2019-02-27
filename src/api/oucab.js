@@ -74,62 +74,108 @@ export default {
 			}]
 		}
 	],
-	grafico: {
-		y: [
-			{
-				taxa: '0'
-			}, {
-				taxa: '5'
-			}, {
-				taxa: '10'
-			}, {
-				taxa: '15'
-			}
-		],
+	grafico1: {
+		titulo: 'Participações privadas',
+		subtitulo: 'Propostas deferidas, por ano de protocolo',
 		x: [
 			{
-				ano: '1995',
-				propostas: 2
+				categoria: '1995',
+				taxa: 2
 			}, {
-				ano: '2001',
-				propostas: 1
+				categoria: '2001',
+				taxa: 1
 			}, {
-				ano: '2002',
-				propostas: 2
+				categoria: '2002',
+				taxa: 2
 			}, {
-				ano: '2003',
-				propostas: 4
+				categoria: '2003',
+				taxa: 4
 			}, {
-				ano: '2004',
-				propostas: 3
+				categoria: '2004',
+				taxa: 3
 			}, {
-				ano: '2005',
-				propostas: 2
+				categoria: '2005',
+				taxa: 2
 			}, {
-				ano: '2006',
-				propostas: 9
+				categoria: '2006',
+				taxa: 9
 			}, {
-				ano: '2007',
-				propostas: 7
+				categoria: '2007',
+				taxa: 7
 			}, {
-				ano: '2008',
-				propostas: 6
+				categoria: '2008',
+				taxa: 6
 			}, {
-				ano: '2009',
-				propostas: 4
+				categoria: '2009',
+				taxa: 4
 			}, {
-				ano: '2010',
-				propostas: 4
+				categoria: '2010',
+				taxa: 4
 			}, {
-				ano: '2011',
-				propostas: 14
+				categoria: '2011',
+				taxa: 14
 			}, {
-				ano: '2012',
-				propostas: 13
+				categoria: '2012',
+				taxa: 13
 			}, {
-				ano: '2013',
-				propostas: 12
+				categoria: '2013',
+				taxa: 12
 			}
-		]
+		],
+		y: [ 0, 5, 10, 15 ],
+		legendaX: 'Anos',
+		legendaY: 'Nº de propostas'
+	},
+	grafico2: {
+		titulo: '',
+		subtitulo: '',
+		x: [
+			{
+				categoria: '1995',
+				taxa: 58443
+			}, {
+				categoria: '2001',
+				taxa: 0
+			}, {
+				categoria: '2002',
+				taxa: 53855
+			}, {
+				categoria: '2003',
+				taxa: 9150
+			}, {
+				categoria: '2004',
+				taxa: 13665
+			}, {
+				categoria: '2005',
+				taxa: 15285
+			}, {
+				categoria: '2006',
+				taxa: 98810
+			}, {
+				categoria: '2007',
+				taxa: 37076
+			}, {
+				categoria: '2008',
+				taxa: 99060
+			}, {
+				categoria: '2009',
+				taxa: 32164
+			}, {
+				categoria: '2010',
+				taxa: 46581
+			}, {
+				categoria: '2011',
+				taxa: 136309
+			}, {
+				categoria: '2012',
+				taxa: 101714
+			}, {
+				categoria: '2013',
+				taxa: 109647
+			}
+		],
+		y: [ 0, 20000, 40000, 60000, 80000, 100000, 120000, 140000, 160000 ],
+		legendaX: 'Anos',
+		legendaY: 'Área adicional de construção consumida (m²)'
 	}
 }
