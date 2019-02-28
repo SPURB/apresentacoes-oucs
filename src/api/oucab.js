@@ -177,5 +177,134 @@ export default {
 		y: [ 0, 20000, 40000, 60000, 80000, 100000, 120000, 140000, 160000 ],
 		legendaX: 'Anos',
 		legendaY: 'Área adicional de construção consumida (m²)'
+	},
+	mapa1: {
+		conjunto1: {
+			nome: 'Viário',
+			caption: 'Intervenções viárias',
+			pontos: [ {
+				legenda: '1',
+				titulo: 'Ponte Júlio de Mesquita Neto',
+				coordX: 44,
+				coordY: 17,
+				info_pares: [ {
+					'Status': 'concluída (1996)'
+				}, {
+					'Fonte recurso': 'Tesouro'
+				} ]
+			}, {
+				legenda: '2a',
+				titulo: 'Av. Auro Soares de Moura Andrade (trecho parcial)',
+				coordX: 36,
+				coordY: 37,
+				info_pares: [ {
+					'Status': 'concluída (2000/2006)',
+				}, {
+					'Fonte recurso': 'Contrapartida Adesões Privadas'
+				} ]
+			}, {
+				legenda: '2b',
+				titulo: 'Prolongamento da Av. Auro Soares de Moura Andrade',
+				coordX: 50,
+				coordY: 43,
+				info_pares: [ {
+					'Status': 'em projeto',
+				}, {
+					'Valor estimado da obra': 'R$ 160 milhões',
+				}, {
+					'Fonte recurso': 'OODC'
+				} ]
+			}, {
+				legenda: '3',
+				titulo: 'Conexões Av. Francisco Matarazzo e Rua Tagipuru',
+				coordX: 64,
+				coordY: 55,
+				info_pares: [ {
+					'Status': 'em andamento',
+				}, {
+					'Valor estimado da obra': 'R$ 10 milhões',
+				}, {
+					'Valor contratatado laudo ambiental': 'R$ 86.592',
+				}, {
+					'Fonte recurso': 'OODC'
+				} ]
+			} ]
+		},
+		conjunto2: {
+			nome: 'HIS e equipamentos públicos',
+			caption: 'Intervenções de HIS, Áreas Públicas e Institucionais',
+			pontos: [ {
+				legenda: '4',
+				titulo: 'Obra emergencial',
+				coordX: 43,
+				coordY: 15,
+				info_pares: [ {
+					'Status': 'em obras',
+				}, {
+					'Valor contratado': 'R$ 1.682.010',
+				}, {
+					'Fonte recurso': 'CEPAC'
+				} ]
+			}, {
+				legenda: '5',
+				titulo: 'Subsetor A1',
+				coordX: 43,
+				coordY: 15,
+				info_pares: [ {
+					sub: 'Projeto Subsetor A1',
+				}, {
+					'Status': 'em elaboração',
+				}, {
+					'Valor estimado do projeto': 'R$ 6.180.391',
+				}, {
+					'Fonte recurso': 'CEPAC'
+				} ]
+			}, {
+				legenda: '5',
+				titulo: 'Subsetor A1',
+				coordX: 43,
+				coordY: 15,
+				info_pares: [ {
+					sub: 'HIS – Subsetor A1 (1ª fase)',
+				}, {
+					'Status': 'em projeto',
+				}, {
+					'Valor estimado da obra': 'R$ 170 milhões',
+				}, {
+					'Fonte recurso': 'OODC'
+				} ]
+			}, {
+				legenda: '#efddb8',
+				titulo: 'Gerenciamento social',
+				coordX: 43,
+				coordY: 15,
+				info_pares: [ {
+					'Status': 'em andamento',
+				}, {
+					'Valor contratado': 'R$ 611.865',
+				}, {
+					'Fonte recurso': 'OODC'
+				} ]
+			} ]
+		},
+		conjunto3: {
+			nome: 'Drenagem',
+			caption: 'Intervenções de Drenagem',
+			pontos: [ {
+				legenda: '6',
+				titulo: 'Obras de drenagem dos córregos Água Preta e Sumaré',
+				coordX: 43,
+				coordY: 15,
+				info_pares: [ {
+					'Status': 'em finalização',
+				}, {
+					'Valor contratado': 'R$ 208.593.477',
+				}, {
+					'Valor a contratar': 'R$ 20 milhões',
+				}, {
+					'Fonte recurso': 'OODC'
+				} ]
+			} ]
+		}
 	}
 }

@@ -67,7 +67,44 @@
 					</ul>
 				</section>
 			</slide>
-			<slide class="s3">
+			<slide class="s3" enter="fadeIn" leave="fadeOut" :steps="mapa.conjunto1.pontos.length + 1">
+				<main class="wrapper">
+					<div class="base">
+						<img src="~@/assets/oucab/0.jpg">
+						<div class="ponto" :class="{ ativo: step == mapa.conjunto1.pontos.indexOf(ponto) + 2 }" v-for="ponto in mapa.conjunto1.pontos" :style="{ left: ponto.coordX + '%', top: ponto.coordY + '%' }">
+							<span class="legenda" :class="tipoLegenda(ponto.legenda)" :style="{ backgroundColor: ponto.legenda }">{{ ponto.legenda }}</span>
+						</div>
+					</div>
+					<aside>
+						<section class="detalhes">
+							<div v-if="step <= 1">
+								<kbd>➔</kbd>
+							</div>
+							<template v-for="ponto in mapa.conjunto1.pontos">
+								<ul :class="{ ativo: step == mapa.conjunto1.pontos.indexOf(ponto) + 2 }">
+									<caption>{{ ponto.titulo }}</caption>
+									<li v-for="par in ponto.info_pares">
+										<span class="key">{{ Object.keys(par).toString() }}</span>
+										<span class="value">{{ Object.values(par).toString() }}</span>
+									</li>
+								</ul>
+							</template>
+						</section>
+						<section class="legenda">
+							<ul v-for="conjunto in mapa">
+								<caption>{{ conjunto.nome }}</caption>
+								<li>
+									<ul>
+										<li v-for="ponto in conjunto.pontos">
+											<span class="label" :class="tipoLegenda(ponto.legenda)" :style="{ backgroundColor: ponto.legenda }">{{ ponto.legenda }}</span>
+											<span class="value">{{ ponto.titulo }}</span>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</section>
+					</aside>
+				</main>
 			</slide>
 		</div>
 	</div>
@@ -82,7 +119,8 @@ export default {
 		return {
 			eventos: obj.linhadotempo,
 			grafico1: obj.grafico1,
-			grafico2: obj.grafico2
+			grafico2: obj.grafico2,
+			mapa: obj.mapa1
 		}
 	},
 	methods: {
@@ -111,6 +149,17 @@ export default {
 				}
 			}
 			return out
+		},
+		tipoLegenda (str) {
+			let classe
+			if (str.substring(0,1) === '#') {
+				classe = 'cor'
+			} else if (str.substring(0,4) === 'lin_' ) {
+				classe = 'linha'
+			} else {
+				classe = 'num'
+			}
+			return classe
 		}
 	},
 	mixins: [ eagle.slideshow ]
@@ -345,6 +394,193 @@ export default {
 	}
 }
 .s3 {
-	background-image: url('~@/assets/oucab/14.jpg')
+	main.wrapper {
+		* { transition: all ease-in-out .1s; }
+		position: relative;
+		display: flex;
+		align-items: flex-start;
+		width: 100vw;
+		height: 100vh;
+		div.base {
+			position: relative;
+			padding: 0;
+			height: auto;
+			width: auto;
+			z-index: 0;
+			box-shadow: 8px 0 8px rgba(0, 0, 0, .2);
+			img {
+				max-width: unset;
+				height: 100vh;
+			}
+			div.ponto {
+				position: absolute;
+				z-index: 1;
+				max-width: 0;
+				max-height: 0;
+				span.legenda {
+					transform: translate(-50%, -50%) scale(1);
+					display: inline-block;
+					vertical-align: top;
+					font-size: 14px;
+					font-weight: bold;
+					line-height: 20px;
+					height: 20px;
+					min-width: 12px;
+					text-align: center;
+					padding: 0 4px;
+					background-color: rgba(255, 255, 255, .8);
+					border-radius: 10px;
+					border: 1px solid #777;
+					cursor: none;
+					&.cor {
+						color: transparent;
+						letter-spacing: -1000px;
+						border-color: rgba(0, 0, 0, .2);
+					}
+				}
+				&.ativo {
+					span.legenda {
+						transform: translate(-50%, -50%) scale(2);
+						background: #777;
+						color: #FFF;
+						&.cor {
+							color: transparent;
+						}
+					}
+					ul.detalhes { opacity: 1; }
+				}
+			}
+		}
+		aside {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 100vh;
+			width: 100%;
+			background: linear-gradient(#333, #777);
+			section.detalhes {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				height: 100%;
+				padding: 48px;
+				& > div {
+					width: 100%;
+					text-align: center;
+					kbd {
+						display: inline-flex;
+						justify-content: center;
+						align-items: center;
+						width: 120px;
+						height: 120px;
+						border-radius: 10px;
+						font-size: 80px;
+						border: 10px solid #FFF;
+						color: #FFF;
+						animation: pisca ease-in-out infinite 2s;
+						@keyframes pisca {
+							0% { opacity: 1; }
+							25% { opacity: 0; }
+							100% { opacity: 1; }
+						}
+					}
+				}
+				ul {
+					list-style-type: none;
+					padding: 0;
+					margin: 0;
+					max-width: 0;
+					width: 100%;
+					overflow: hidden;
+					opacity: 0;
+					color: #FFF;
+					caption {
+						font-size: 0;
+						font-weight: bold;
+						width: 100%;
+						margin: 0 0 40px 0;
+						text-align: left;
+					}
+					li {
+						margin-bottom: 12px;
+						font-size: 0;
+						&:last-child { margin-bottom: 0; }
+						span.key {
+							display: inline-block;
+							font-size: 0;
+							line-height: 28px;
+							color: rgba(255, 255, 255, .4);
+							text-transform: uppercase;
+							margin-right: 12px;
+						}
+						span.value {
+							font-size: 0;
+							line-height: 14px;
+							white-space: nowrap;
+						}
+					}
+					&.ativo {
+						max-width: 100%;
+						opacity: 1;
+						caption { font-size: 36px; }
+						li {
+							span.key { font-size: 16px; }
+							span.value { font-size: 20px; }
+						}
+					}
+				}
+			}
+			section.legenda {
+				font-size: 14px;
+				line-height: 16px;
+				background-color: #FFF;
+				padding: 16px 20px;
+				& > ul {
+					list-style-type: none;
+					padding: 0;
+					margin: 0 0 20px 0;
+					caption {
+						font-weight: bold;
+						width: 100%;
+						text-align: left;
+						margin: 0 0 4px 0;
+						line-height: initial;
+					}
+					li {
+						ul {
+							list-style-type: none;
+							padding: 0;
+							li {
+								display: flex;
+								flex-direction: row;
+								align-items: center;
+								margin-bottom: 8px;
+								&:last-child { margin-bottom: 0; }
+								span.label {
+									display: inline-block;
+									height: 14px;
+									line-height: 14px;
+									min-width: 6px;
+									padding: 0 4px;
+									text-align: center;
+									font-size: 10px;
+									border: 1px solid #777;
+									border-radius: 7px;
+									margin-right: 6px;
+									&.cor {
+										color: transparent;
+										letter-spacing: -1000px;
+										border-color: rgba(0, 0, 0, .2);
+									}
+								}
+								span.value {
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 </style>
