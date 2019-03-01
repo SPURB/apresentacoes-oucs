@@ -1,24 +1,55 @@
 <template>
 	<div id="Oucab">
 		<div class="eg-slideshow">
-			<slide class="s1" enter="fadeInRight" leave="fadeOutLeft">
-					<ul class="linha">
-						<li v-for="evento in eventos" :class="evento.tipo">
-							<div class="ano">
-								<span>{{ evento.nome }}</span>
-							</div>
-							<ul class="noAno">
-								<li v-for="eventoNoAno in evento.pontos" :class="{ destaque: eventoNoAno.destaque, outer: eventoNoAno.outer }">
-									<div class="titulo" v-html="eventoNoAno.cont"></div>
-									<div class="complemento">
-										{{ eventoNoAno.comp }}
-									</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
+			<slide class="capa" enter="fadeIn" leave="zoomOut">
+				<div class="wrap">
+					<div class="bg" :style="{ backgroundImage: 'url(' + imgurl(capa.fundo) + ')', backgroundColor: capa.filtro }">
+					</div>
+					<main>
+						<h1>{{ capa.titulo }}</h1>
+						<h2 v-if="capa.subtitulo">{{ capa.subtitulo }}</h2>
+					</main>
+					<footer>
+						<p v-if="capa.autoria" class="autoria">{{ capa.autoria }}</p>
+						<p v-if="capa.data">{{ capa.data }}</p>
+					</footer>
+				</div>
 			</slide>
-			<slide class="s2" enter="fadeIn" leave="fadeOut">
+			<slide class="s1" enter="fadeInRight" leave="fadeOutLeft">
+				<ul class="linha">
+					<li v-for="evento in eventos1" :class="evento.tipo">
+						<div class="ano">
+							<span>{{ evento.nome }}</span>
+						</div>
+						<ul class="noAno">
+							<li v-for="eventoNoAno in evento.pontos" :class="{ destaque: eventoNoAno.destaque, outer: eventoNoAno.outer }">
+								<div class="titulo" v-html="eventoNoAno.cont"></div>
+								<div class="complemento">
+									{{ eventoNoAno.comp }}
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</slide>
+			<slide class="s1" enter="fadeInRight" leave="fadeOutLeft">
+				<ul class="linha">
+					<li v-for="evento in eventos2" :class="evento.tipo">
+						<div class="ano">
+							<span>{{ evento.nome }}</span>
+						</div>
+						<ul class="noAno">
+							<li v-for="eventoNoAno in evento.pontos" :class="{ destaque: eventoNoAno.destaque, outer: eventoNoAno.outer }">
+								<div class="titulo" v-html="eventoNoAno.cont"></div>
+								<div class="complemento">
+									{{ eventoNoAno.comp }}
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</slide>
+			<slide class="s2" enter="slideInUp" leave="rollOut">
 				<section class="grafico" :class="{ comtitulo: grafico1.titulo }">
 					<caption class="titulo" v-if="grafico1.titulo">
 						<h1>{{ grafico1.titulo }}</h1>
@@ -67,21 +98,28 @@
 					</ul>
 				</section>
 			</slide>
-			<slide class="s3" enter="fadeIn" leave="fadeOut" :steps="mapa.conjunto1.pontos.length + 1">
+			<slide class="s3" enter="zoomIn" leave="fadeOut" :steps="mapa.conjunto1.pontos.length + 1">
 				<main class="wrapper">
 					<div class="base">
-						<img src="~@/assets/oucab/0.jpg">
+						<img :src="imgurl(mapa.conjunto1.base)">
 						<div class="ponto" :class="{ ativo: step == mapa.conjunto1.pontos.indexOf(ponto) + 2 }" v-for="ponto in mapa.conjunto1.pontos" :style="{ left: ponto.coordX + '%', top: ponto.coordY + '%' }">
 							<span class="legenda" :class="tipoLegenda(ponto.legenda)" :style="{ backgroundColor: ponto.legenda }">{{ ponto.legenda }}</span>
 						</div>
 					</div>
 					<aside>
+						<section class="titulo">
+							<h2>Mapa</h2>
+							<h1>{{ mapa.conjunto1.caption }}</h1>
+						</section>
 						<section class="detalhes">
-							<div v-if="step <= 1">
+							<div :class="{ ativo: step <= 1 }">
 								<kbd>➔</kbd>
 							</div>
 							<template v-for="ponto in mapa.conjunto1.pontos">
 								<ul :class="{ ativo: step == mapa.conjunto1.pontos.indexOf(ponto) + 2 }">
+									<div class="imagens">
+										<img v-for="imagem in ponto.imagens" :src="imgurl(imagem.nome)" :alt="imagem.alt">
+									</div>
 									<caption>{{ ponto.titulo }}</caption>
 									<li v-for="par in ponto.info_pares">
 										<span class="key">{{ Object.keys(par).toString() }}</span>
@@ -117,7 +155,9 @@ export default {
 	name: 'Oucab',
 	data () {
 		return {
-			eventos: obj.linhadotempo,
+			capa: obj.capa,
+			eventos1: obj.linhadotempo1,
+			eventos2: obj.linhadotempo2,
 			grafico1: obj.grafico1,
 			grafico2: obj.grafico2,
 			mapa: obj.mapa1
@@ -152,14 +192,17 @@ export default {
 		},
 		tipoLegenda (str) {
 			let classe
-			if (str.substring(0,1) === '#') {
+			if (str.substring(0, 1) === '#') {
 				classe = 'cor'
-			} else if (str.substring(0,4) === 'lin_' ) {
+			} else if (str.substring(0, 4) === 'lin_') {
 				classe = 'linha'
 			} else {
 				classe = 'num'
 			}
 			return classe
+		},
+		imgurl (nomeArquivo) {
+			return './img/oucab/' + nomeArquivo
 		}
 	},
 	mixins: [ eagle.slideshow ]
@@ -177,6 +220,68 @@ export default {
 }
 .eg-slide-content {
 	margin: 0;
+}
+.capa {
+	z-index: 0;
+	div.wrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100vw;
+		height: 100vh;
+		background-color: transparent;
+		color: #FFF;
+		div.bg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			max-width: 100vw;
+			max-height: 100vh;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			z-index: -1;
+			background-blend-mode: multiply;
+		}
+		main {
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			* {
+				margin-bottom: 20px;
+				&:last-of-type { margin-bottom: 0; }
+			}
+			h1 {
+				font-size: 8vmin;
+				padding: 0 40px;
+				text-shadow: 0 0 8px rgba(0, 0, 0, .4);
+			}
+			h2 {
+				font-size: 4vmin;
+				padding: 0 40px;
+				font-weight: normal;
+				opacity: .8;
+			}
+		}
+		footer {
+			background-color: rgba(0, 0, 0, .4);
+			text-align: center;
+			padding: 20px;
+			p {
+				font-size: 14px;
+				line-height: 18px;
+				margin: 0 0 4px 0;
+				&:last-of-type { margin-bottom: 0; }
+				opacity: .8;
+				&.autoria {
+					font-weight: bold;
+					opacity: 1;
+				}
+			}
+		}
+	}
 }
 .s1 {
 	* { box-sizing: border-box; }
@@ -248,7 +353,12 @@ export default {
 				color: #FFF;
 				background-color: #777;
 			}}
-		li.cinza-neg {}
+		li.cinza-neg {
+			.ano span {
+				color: #777;
+				background-color: #CCC;
+			}
+		}
 		li.laranja {
 			.ano span {
 				color: #FFF;
@@ -440,8 +550,9 @@ export default {
 				}
 				&.ativo {
 					span.legenda {
-						transform: translate(-50%, -50%) scale(2);
-						background: #777;
+						transform: translate(-50%, -50%) scale(3);
+						background: rgba(0, 0, 0, .5);
+						border-color: transparent;
 						color: #FFF;
 						&.cor {
 							color: transparent;
@@ -458,52 +569,94 @@ export default {
 			height: 100vh;
 			width: 100%;
 			background: linear-gradient(#333, #777);
+			section.titulo {
+				padding: 16px 20px;
+				h2 {
+					color: #777;
+					font-size: 12px;
+					font-weight: normal;
+					text-align: left;
+					padding: 0;
+					margin: 0;
+				}
+				h1 {
+					color: #FFF;
+					font-size: 20px;
+					font-weight: bold;
+					text-align: left;
+					padding: 0;
+					margin: 0;
+				}
+			}
 			section.detalhes {
 				display: flex;
-				align-items: center;
 				flex-direction: row;
+				align-items: flex-start;
 				height: 100%;
-				padding: 48px;
 				& > div {
+					align-self: center;
+					max-width: 0;
 					width: 100%;
 					text-align: center;
+					height: 130px;
+					overflow: hidden;
 					kbd {
 						display: inline-flex;
 						justify-content: center;
 						align-items: center;
 						width: 120px;
-						height: 120px;
+						height: 110px;
 						border-radius: 10px;
 						font-size: 80px;
-						border: 10px solid #FFF;
-						color: #FFF;
-						animation: pisca ease-in-out infinite 2s;
-						@keyframes pisca {
-							0% { opacity: 1; }
-							25% { opacity: 0; }
-							100% { opacity: 1; }
+						color: #777;
+						background-color: #E5E5E5;
+						box-shadow: 0 20px 0 #777;
+						animation: aperta step-start infinite 6s;
+						@keyframes aperta {
+							0% { box-shadow: 0 20px 0 #777; transform: translateY(0); color: #777; background-color: #E5E5E5; }
+							3% { box-shadow: 0 0 0 #777; transform: translateY(20px); color: #333; background-color: #BDBDBD; }
+							20% { box-shadow: 0 20px 0 #777; transform: translateY(0); color: #777; background-color: #E5E5E5; }
+							22% { box-shadow: 0 0 0 #777; transform: translateY(20px); color: #333; background-color: #BDBDBD; }
 						}
 					}
+					&.ativo { max-width: 10000px; }
 				}
 				ul {
 					list-style-type: none;
 					padding: 0;
 					margin: 0;
-					max-width: 0;
-					width: 100%;
+					width: 0;
 					overflow: hidden;
 					opacity: 0;
 					color: #FFF;
+					div.imagens {
+						display: flex;
+						align-items: center;
+						justify-content: space-evenly;
+						overflow: hidden;
+						max-width: 100%;
+						background-color: rgba(0, 0, 0, .2);
+						padding: 10px;
+						img {
+							height: 100%;
+							max-height: 320px;
+							margin-right: 10px;
+							&:last-child { margin-right: 0; }
+						}
+					}
 					caption {
 						font-size: 0;
 						font-weight: bold;
+						max-width: calc(100% - 40px);
 						width: 100%;
-						margin: 0 0 40px 0;
+						margin: 20px 0 10px 0;
 						text-align: left;
+						padding: 0 20px;
 					}
 					li {
-						margin-bottom: 12px;
 						font-size: 0;
+						padding: 0 20px;
+						margin-bottom: 4px;
 						&:last-child { margin-bottom: 0; }
 						span.key {
 							display: inline-block;
@@ -520,12 +673,12 @@ export default {
 						}
 					}
 					&.ativo {
-						max-width: 100%;
+						width: 100%;
 						opacity: 1;
-						caption { font-size: 36px; }
+						caption { font-size: 26px; }
 						li {
-							span.key { font-size: 16px; }
-							span.value { font-size: 20px; }
+							span.key { font-size: 14px; }
+							span.value { font-size: 18px; }
 						}
 					}
 				}
@@ -539,6 +692,7 @@ export default {
 					list-style-type: none;
 					padding: 0;
 					margin: 0 0 20px 0;
+					&:last-child { margin-bottom: 0; }
 					caption {
 						font-weight: bold;
 						width: 100%;

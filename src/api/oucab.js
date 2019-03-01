@@ -1,5 +1,84 @@
 export default {
-	linhadotempo: [
+	capa: {
+		titulo: 'Operação Urbana Consorciada Água Branca',
+		subtitulo: '',
+		autoria: 'SP Urbanismo - Diretoria de Gestão das Operações Urbanas',
+		data: 'Dezembro/2018',
+		fundo: '4.jpg',
+		filtro: '#f90'
+	},
+	linhadotempo1: [
+		{
+			nome: '1971',
+			tipo: 'cinza-pos',
+			pontos: [{
+				cont: 'Instituição do <b>Plano Diretor de Desenvolvimento Integrado – PDDI</b>',
+				comp: 'Lei 7.688/71',
+				destaque: true
+			}]
+		}, {
+			nome: '1972',
+			tipo: 'cinza-pos',
+			pontos: [{
+				cont: '<b>Primeira Lei de Parcelamento, Uso e Ocupação do Solo - LPUOS</b> do município de São Paulo',
+				comp: 'Lei 7.805/72',
+				destaque: true
+			}]
+		}, {
+			nome: '1986',
+			tipo: 'cinza-neg',
+			pontos: [{
+				cont: 'A <b>Lei do Desfavelamento</b> define as <b>Operações Interligadas</b>',
+				comp: 'Lei 10.209/86',
+				destque: false
+			}]
+		}, {
+			nome: '1988',
+			tipo: 'cinza-pos',
+			pontos: [{
+				cont: 'Aprovação do <b>Plano Diretor da Cidade</b>, que instituiu a <b>Comissão Normativa de Legislação Urbanística (CNLU)</b> com  competência para “aprovar projetos de <b>Operação Urbana</b>”.',
+				comp: 'Lei 10.676/88',
+				destaque: true
+			}]
+		}, {
+			nome: '1991',
+			tipo: 'cinza-neg',
+			pontos: [{
+				cont: 'Aprovação da <b>Operação Urbana do Anhangabaú</b>',
+				comp: 'Lei 11.090/91',
+				destque: false
+			}]
+		}, {
+			nome: '1992',
+			tipo: 'cinza-pos',
+			pontos: [{
+				cont: 'Aprovação da <b>Lei Orgânica do Município</b>, que prevê, no Art. 152, a <b>Operação Urbana</b> como um instrumento de intervenção pública na cidade.',
+				destaque: true
+			}]
+		}, {
+			nome: '1995',
+			tipo: 'laranja',
+			pontos: [{
+				cont: 'Aprovação da <b>Operação Urbana Água Branca</b>',
+				comp: 'Lei 11.794/95',
+				destaque: true
+			}, {
+				cont: 'Aprovação da <b>Operação Urbana Faria Lima</b>',
+				comp: 'Lei 11.732/95',
+				destaque: false,
+				outer: true
+			}]
+		}, {
+			nome: '1997',
+			tipo: 'cinza-neg',
+			pontos: [{
+				cont: 'Aprovação da <b>Operação Urbana Centro</b>',
+				comp: 'Lei 12.349/97',
+				destaque: false
+			}]
+		}
+	],
+	linhadotempo2: [
 		{
 			nome: '2001',
 			tipo: 'cinza-pos',
@@ -71,6 +150,13 @@ export default {
 				cont: '<b>Revogação</b> da Operação Urbana Consorciada Rio Verde-Jacu',
 				comp: 'Lei 16.492/16',
 				destaque: false
+			}]
+		}, {
+			nome: '2018',
+			tipo: 'laranja',
+			pontos: [{
+				cont: '<b>Apresentado à Camara Munipal</b> o PL 397/2018, que altera disposições da Lei 15.893/2013',
+				destaque: true
 			}]
 		}
 	],
@@ -182,6 +268,7 @@ export default {
 		conjunto1: {
 			nome: 'Viário',
 			caption: 'Intervenções viárias',
+			base: '0.jpg',
 			pontos: [ {
 				legenda: '1',
 				titulo: 'Ponte Júlio de Mesquita Neto',
@@ -191,6 +278,10 @@ export default {
 					'Status': 'concluída (1996)'
 				}, {
 					'Fonte recurso': 'Tesouro'
+				} ],
+				imagens: [ {
+					nome: '14.jpg',
+					alt: ''
 				} ]
 			}, {
 				legenda: '2a',
@@ -198,9 +289,13 @@ export default {
 				coordX: 36,
 				coordY: 37,
 				info_pares: [ {
-					'Status': 'concluída (2000/2006)',
+					'Status': 'concluída (2000/2006)'
 				}, {
 					'Fonte recurso': 'Contrapartida Adesões Privadas'
+				} ],
+				imagens: [ {
+					nome: '15.jpg',
+					alt: ''
 				} ]
 			}, {
 				legenda: '2b',
@@ -208,11 +303,15 @@ export default {
 				coordX: 50,
 				coordY: 43,
 				info_pares: [ {
-					'Status': 'em projeto',
+					'Status': 'em projeto'
 				}, {
-					'Valor estimado da obra': 'R$ 160 milhões',
+					'Valor estimado da obra': 'R$ 160 milhões'
 				}, {
 					'Fonte recurso': 'OODC'
+				} ],
+				imagens: [ {
+					nome: '16.png',
+					alt: ''
 				} ]
 			}, {
 				legenda: '3',
@@ -220,13 +319,20 @@ export default {
 				coordX: 64,
 				coordY: 55,
 				info_pares: [ {
-					'Status': 'em andamento',
+					'Status': 'em andamento'
 				}, {
-					'Valor estimado da obra': 'R$ 10 milhões',
+					'Valor estimado da obra': 'R$ 10 milhões'
 				}, {
-					'Valor contratatado laudo ambiental': 'R$ 86.592',
+					'Valor contratatado laudo ambiental': 'R$ 86.592'
 				}, {
 					'Fonte recurso': 'OODC'
+				} ],
+				imagens: [ {
+					nome: '17.png',
+					alt: ''
+				}, {
+					nome: '18.png',
+					alt: ''
 				} ]
 			} ]
 		},
@@ -239,23 +345,9 @@ export default {
 				coordX: 43,
 				coordY: 15,
 				info_pares: [ {
-					'Status': 'em obras',
+					'Status': 'em obras'
 				}, {
-					'Valor contratado': 'R$ 1.682.010',
-				}, {
-					'Fonte recurso': 'CEPAC'
-				} ]
-			}, {
-				legenda: '5',
-				titulo: 'Subsetor A1',
-				coordX: 43,
-				coordY: 15,
-				info_pares: [ {
-					sub: 'Projeto Subsetor A1',
-				}, {
-					'Status': 'em elaboração',
-				}, {
-					'Valor estimado do projeto': 'R$ 6.180.391',
+					'Valor contratado': 'R$ 1.682.010'
 				}, {
 					'Fonte recurso': 'CEPAC'
 				} ]
@@ -265,11 +357,25 @@ export default {
 				coordX: 43,
 				coordY: 15,
 				info_pares: [ {
-					sub: 'HIS – Subsetor A1 (1ª fase)',
+					sub: 'Projeto Subsetor A1'
 				}, {
-					'Status': 'em projeto',
+					'Status': 'em elaboração'
 				}, {
-					'Valor estimado da obra': 'R$ 170 milhões',
+					'Valor estimado do projeto': 'R$ 6.180.391'
+				}, {
+					'Fonte recurso': 'CEPAC'
+				} ]
+			}, {
+				legenda: '5',
+				titulo: 'Subsetor A1',
+				coordX: 43,
+				coordY: 15,
+				info_pares: [ {
+					sub: 'HIS – Subsetor A1 (1ª fase)'
+				}, {
+					'Status': 'em projeto'
+				}, {
+					'Valor estimado da obra': 'R$ 170 milhões'
 				}, {
 					'Fonte recurso': 'OODC'
 				} ]
@@ -279,9 +385,9 @@ export default {
 				coordX: 43,
 				coordY: 15,
 				info_pares: [ {
-					'Status': 'em andamento',
+					'Status': 'em andamento'
 				}, {
-					'Valor contratado': 'R$ 611.865',
+					'Valor contratado': 'R$ 611.865'
 				}, {
 					'Fonte recurso': 'OODC'
 				} ]
@@ -296,11 +402,11 @@ export default {
 				coordX: 43,
 				coordY: 15,
 				info_pares: [ {
-					'Status': 'em finalização',
+					'Status': 'em finalização'
 				}, {
-					'Valor contratado': 'R$ 208.593.477',
+					'Valor contratado': 'R$ 208.593.477'
 				}, {
-					'Valor a contratar': 'R$ 20 milhões',
+					'Valor a contratar': 'R$ 20 milhões'
 				}, {
 					'Fonte recurso': 'OODC'
 				} ]
