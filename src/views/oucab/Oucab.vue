@@ -49,7 +49,7 @@
 					</li>
 				</ul>
 			</slide>
-			<slide class="s2" enter="slideInUp" leave="rollOut">
+			<slide class="s2" enter="slideInUp">
 				<section class="grafico" :class="{ comtitulo: grafico1.titulo }">
 					<caption class="titulo" v-if="grafico1.titulo">
 						<h1>{{ grafico1.titulo }}</h1>
@@ -98,7 +98,7 @@
 					</ul>
 				</section>
 			</slide>
-			<slide class="s3" enter="zoomIn" leave="fadeOut" :steps="mapa.conjunto1.pontos.length + 1">
+			<slide class="s3" leave="fadeOut" :steps="mapa.conjunto1.pontos.length + 1">
 				<main class="wrapper">
 					<div class="base">
 						<img :src="imgurl(mapa.conjunto1.base)">
@@ -242,6 +242,8 @@ export default {
 			overflow: hidden;
 			z-index: -1;
 			background-blend-mode: multiply;
+			background-position: center center;
+			background-size: cover;
 		}
 		main {
 			display: flex;
@@ -401,7 +403,7 @@ export default {
 		ul {
 			margin: 0;
 			caption.legenda {
-				font-size: 10px;
+				font-size: 16px;
 				font-weight: bold;
 				text-transform: uppercase;
 			}
@@ -414,7 +416,7 @@ export default {
 			flex-direction: row;
 			justify-content: space-evenly;
 			list-style-type: none;
-			padding: 0 20px;
+			padding: 0 20px 0 40px;
 			width: calc(100% - 160px);
 			max-height: 100%;
 			li {
@@ -441,16 +443,16 @@ export default {
 				}
 				caption {
 					position: absolute;
-					bottom: -20px;
-					font-size: 12px;
+					bottom: -24px;
+					font-size: 16px;
 					color: #777;
-					line-height: 12px;
+					line-height: 16px;
 					max-width: 100%;
 				}
 			}
 			& caption.legenda {
 				position: absolute;
-				bottom: -16px;
+				bottom: -24px;
 				right: 0;
 			}
 		}
@@ -466,7 +468,7 @@ export default {
 			li {
 				display: flex;
 				border-bottom: 1px solid #E0E0E0;
-				font-size: 12px;
+				font-size: 16px;
 				color: #777;
 				padding: 4px 0 8px 0;
 			}
@@ -474,7 +476,7 @@ export default {
 			& caption.legenda {
 				text-align: left;
 				height: 0;
-				transform: translateY(-16px);
+				transform: translateY(-24px);
 			}
 		}
 		div.sticker {
@@ -573,7 +575,7 @@ export default {
 				padding: 16px 20px;
 				h2 {
 					color: #777;
-					font-size: 12px;
+					font-size: 16px;
 					font-weight: normal;
 					text-align: left;
 					padding: 0;
@@ -649,7 +651,7 @@ export default {
 						font-weight: bold;
 						max-width: calc(100% - 40px);
 						width: 100%;
-						margin: 20px 0 10px 0;
+						margin: 10px 0 20px 0;
 						text-align: left;
 						padding: 0 20px;
 					}
