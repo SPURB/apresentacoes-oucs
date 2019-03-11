@@ -1,7 +1,7 @@
 <template lang="pug">
 	#Home
 		header
-			button(ref='toggleViewModeBt' @click='changeViewMode($event)' title='Ver em lista')
+			button(ref='toggleViewModeBt' @click='changeViewMode($event)' title='Ver em lista' style='background: url(img/icons/toggleViewIcon.svg)')
 			h1 Apresentações
 			p Habilite o modo de tela cheia do seu navegador (<kbd>F11</kbd>, para Windows, ou <kbd title="Control">⌃</kbd> + <kbd title="Command">⌘</kbd> + <kbd>F</kbd>, para macOS) e selecione (com o mouse ou <kbd title="Seta esquerda">&larr;</kbd><kbd title="Seta direita">&rarr;</kbd>) uma das apresentações abaixo para começar.
 		main#wrap(ref='main')
@@ -47,12 +47,76 @@ export default {
 			this.toggleViewMode++
 			let bt = this.$refs.toggleViewModeBt
 			if (this.toggleViewMode % 2 === 0) {
-				bt.style.backgroundPosition = '0 0'
+				bt.style.backgroundPosition = '0'
 				bt.title = 'Ver em lista'
 			} else {
-				bt.style.backgroundPosition = '100% 100%'
+				bt.style.backgroundPosition = '100%'
 				bt.title = 'Ver em grade'
 			}
+		},
+		navEvents () {
+			document.addEventListener('keyup', event => {
+				let cards = document.querySelectorAll('.routerlink')
+				if (event.code === 'ArrowRight') {
+					if (this.kbdNavIndex > cards.length) {
+						this.kbdNavIndex = cards.length + 1
+					} else {
+						this.kbdNavIndex++
+						this.eventHistory.push(event.code)
+						Array.from(cards).map(index => {
+							if (parseInt(index.dataset.index) === this.kbdNavIndex) {
+								index.focus()
+								index.parentNode.classList.add('kbdNav')
+							} else {
+								index.blur()
+								index.parentNode.classList.remove('kbdNav')
+							}
+						})
+					}
+				} else if (event.code === 'ArrowLeft') {
+					if (this.kbdNavIndex <= 0) {
+						this.kbdNavIndex = 0
+					} else {
+						this.kbdNavIndex--
+						this.eventHistory.push(event.code)
+						Array.from(cards).map(index => {
+							if (parseInt(index.dataset.index) === this.kbdNavIndex) {
+								index.focus()
+								index.parentNode.classList.add('kbdNav')
+							} else {
+								index.blur()
+								index.parentNode.classList.remove('kbdNav')
+							}
+						})
+					}
+				} else if (document.activeElement !== document.body && event.code === 'Escape') {
+					document.activeElement.parentNode.classList.remove('kbdNav')
+					if (this.eventHistory[this.eventHistory.length - 1] === 'ArrowRight') {
+						if (this.kbdNavIndex <= 0) {
+							this.kbdNavIndex = 0
+						} else {
+							this.kbdNavIndex++
+						}
+					} else if (this.eventHistory[this.eventHistory.length - 1] === 'ArrowLeft') {
+						if (this.kbdNavIndex > cards.length) {
+							this.kbdNavIndex = cards.length + 1
+						} else {
+							this.kbdNavIndex--
+						}
+					}
+				} else {
+					return false
+				}
+				document.addEventListener('click', event => {
+					if (event.target !== this.$refs.main) {
+						Array.from(cards).map(index => {
+							index.parentNode.classList.remove('kbdNav')
+						})
+					} else {
+						return false
+					}
+				})
+			})
 		}
 	},
 	created () {
@@ -68,59 +132,7 @@ export default {
 		})
 	},
 	mounted () {
-		document.addEventListener('keyup', event => {
-			let cards = document.querySelectorAll('.routerlink')
-			if (event.code === 'ArrowRight') {
-				if (this.kbdNavIndex > cards.length) {
-					this.kbdNavIndex = cards.length + 1
-				} else {
-					this.kbdNavIndex++
-					this.eventHistory.push(event.code)
-					Array.from(cards).map(index => {
-						if (parseInt(index.dataset.index) === this.kbdNavIndex) {
-							index.focus()
-							index.parentNode.classList.add('kbdNav')
-						} else {
-							index.blur()
-							index.parentNode.classList.remove('kbdNav')
-						}
-					})
-				}
-			} else if (event.code === 'ArrowLeft') {
-				if (this.kbdNavIndex <= 0) {
-					this.kbdNavIndex = 0
-				} else {
-					this.kbdNavIndex--
-					this.eventHistory.push(event.code)
-					Array.from(cards).map(index => {
-						if (parseInt(index.dataset.index) === this.kbdNavIndex) {
-							index.focus()
-							index.parentNode.classList.add('kbdNav')
-						} else {
-							index.blur()
-							index.parentNode.classList.remove('kbdNav')
-						}
-					})
-				}
-			} else if (document.activeElement !== document.body && event.code === 'Escape') {
-				document.activeElement.parentNode.classList.remove('kbdNav')
-				if (this.eventHistory[this.eventHistory.length - 1] === 'ArrowRight') {
-					if (this.kbdNavIndex <= 0) {
-						this.kbdNavIndex = 0
-					} else {
-						this.kbdNavIndex++
-					}
-				} else if (this.eventHistory[this.eventHistory.length - 1] === 'ArrowLeft') {
-					if (this.kbdNavIndex > cards.length) {
-						this.kbdNavIndex = cards.length + 1
-					} else {
-						this.kbdNavIndex--
-					}
-				}
-			} else {
-				return false
-			}
-		})
+		this.navEvents()
 	}
 }
 </script>
@@ -157,7 +169,6 @@ export default {
 			width: 40px;
 			height: 40px;
 			border: 0;
-			background: url('~/img/icons/toggleViewIcon.svg');
 			background-position: 0 0;
 			transition-duration: .4s;
 			transition-timing-function: linear;
@@ -265,8 +276,8 @@ export default {
 				align-items: center;
 				.embeddeds {
 					display: inline-block;
-					width: 60px;
-					height: 45px;
+					width: 80px;
+					height: 55px;
 					margin-right: 20px;
 				}
 				.main {
