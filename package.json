@@ -33,7 +33,7 @@
 		"eagle.js": "0.4.4",
 		"eslint": "5.13.0",
 		"eslint-plugin-vue": "5.2.1",
-		"highlight.js": "9.14.2",
+		"highlight.js": "9.18.3",
 		"node-sass": "4.11.0",
 		"pug": "2.0.3",
 		"pug-plain-loader": "1.0.0",
