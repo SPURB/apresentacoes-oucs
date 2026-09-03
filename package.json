@@ -31,7 +31,7 @@
 		"animate.css": "3.7.0",
 		"babel-eslint": "10.0.1",
 		"eagle.js": "0.4.4",
-		"eslint": "5.13.0",
+		"eslint": "5.16.0",
 		"eslint-plugin-vue": "5.2.1",
 		"highlight.js": "9.14.2",
 		"node-sass": "4.11.0",
